@@ -1,0 +1,78 @@
+# csuper configuration — dashboard-related sections.
+# Every key here must also exist in the zod schema in src/config.ts.
+
+general:
+  csuper_home: "~/.csuper"            # Root for everything below
+  socket_dir: "~/.csuper/sessions"    # One <id>.sock per session (replaces socket_path)
+  log_dir: "~/.csuper/logs"           # One <id>.jsonl per session (replaces log_file)
+  log_max_bytes: 10485760             # Rotate a session log once it passes 10 MiB
+  log_keep_files: 5                   # Rotated files kept: <id>.1.jsonl … <id>.5.jsonl
+  subscriber_buffer_msgs: 1000        # Per-dashboard send buffer; client dropped on overflow
+  reconnect_max_backoff_ms: 10000     # Dashboard reconnect backoff ceiling
+
+# Keyword triggers: matched against the LAST non-empty line of claude's final message
+# (Stop hook). task_complete runs a checked /clear → /next cycle (see autopilot below).
+triggers:
+  - name: task_complete
+    keyword: "::DONE::"
+    match_mode: last_line
+    enabled: true
+    save_handover: true               # copy the final message to .claude/csuper-handovers/
+    git_checkpoint: true              # chore(csuper): checkpoint commit when the tree is dirty
+    commands: ["/clear", "/next"]
+  - name: human_escalation
+    keyword: "::BLOCKED::"
+    match_mode: last_line
+    pause_autopilot: true
+    notify_macos: true
+    commands: []
+  - name: all_complete
+    keyword: "::COMPLETE::"
+    match_mode: last_line
+    pause_autopilot: true
+    notify_macos: true
+    commands: []
+
+pre_clear_delay_ms: 5000              # Countdown before /clear; `c` in csuper dash cancels it
+
+autopilot:
+  cycle_step_timeout_ms: 30000        # Each cycle step must be confirmed in time, or the cycle fails and autopilot pauses
+  idle_quiet_ms: 1500                 # "claude idle" = no terminal output for this long
+
+rate_limits:
+  auto_resume: true
+  resume_prompt: "continue"
+  reset_margin_seconds: 90
+  prevent_system_sleep: true          # caffeinate -i while waiting
+  model_failover_order: ["opus", "sonnet"]
+  circuit_breakers:
+    max_auto_cycles_per_session: 20   # Successful /clear→/next cycles before autopilot stops itself (≥ 1)
+    weekly_quota_stop_pct: 85         # No data source yet: the weekly % is unknown, so this never fires
+    active_hours: "always"            # always | HH:MM-HH:MM (local, may wrap midnight)
+  resume_verify_seconds: 60           # A new limit message within this window = the resume failed
+  max_failed_resumes: 3               # Consecutive failed resumes before pausing + notifying
+  unparsed_retry_initial_seconds: 300 # Reset time unreadable: retry after 5 min, doubling…
+  unparsed_retry_max_seconds: 1800    # …up to 30 min; never gives up
+  pty_fallback_grace_ms: 5000         # A banner seen only on screen is acted on if no hook reports it in this time
+
+# Anomaly breaker. Must be ≥ 1 (0 is rejected; there is no "unlimited").
+# [FILL: confirm section name and default against the core csuper spec]
+anomalies:
+  max_consecutive_tool_failures: 5    # Tool-failure streak that trips the breaker (pauses autopilot)
+
+adopt:                                # csuper adopt / csuper resume
+  default_autopilot: false            # Adopted sessions start PAUSED; Ctrl+G or `p` in dash to start
+  default_open_mode: "tabs"           # tabs | here (with one session, always here unless --tabs)
+  compact_on_adopt: false             # Send /compact right after resuming
+  stop_wait_timeout_ms: 10000         # How long to wait for the original claude to exit (--stop-original)
+  scan_limit: 50                      # Sessions shown in the picker
+
+dashboard:
+  refresh_fallback_ms: 1000        # Redraw interval if no events arrive (keeps countdowns ticking)
+  log_tail_lines: 500              # Lines held in the TUI log buffer
+  default_log_level: "info"        # all | info | warn | error
+  recent_triggers_shown: 10
+  handover_preview_lines: 15
+  confirm_skip_wait: true          # Ask y/N before skip-wait
+  color: "auto"                    # auto | always | never
+  time_format: "24h"               # 24h | 12h

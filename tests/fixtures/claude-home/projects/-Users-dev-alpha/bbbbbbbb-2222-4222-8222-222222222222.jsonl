@@ -1,0 +1,3 @@
+{"type":"user","isSidechain":false,"cwd":"/Users/dev/alpha","sessionId":"bbbbbbbb-2222-4222-8222-222222222222","message":{"role":"user","content":"<command-name>/model</command-name>"}}
+{"type":"user","isSidechain":false,"cwd":"/Users/dev/alpha","sessionId":"bbbbbbbb-2222-4222-8222-222222222222","message":{"role":"user","content":"Add retries to the uploader"}}
+{"type":"ai-title","aiTitle":"Uploader retries","sessionId":"bbbbbbbb-2222-4222-8222-222222222222"}

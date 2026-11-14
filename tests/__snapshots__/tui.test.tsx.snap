@@ -1,0 +1,211 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DashView snapshots > renders all six panels 1`] = `
+"╭────────────────────────────────────────────────╮╭────────────────────────────────────────────────╮
+│ 1 Session & Autopilot                          ││ 2 Rate Limits & Quota                          │
+│ session      a1b2c3 v0.1.0                     ││ state        ok · last: 5-hour limit (hook)    │
+│ project      /Users/dev/proj                   ││ resets at    05:30:00 (now)                    │
+│ autopilot    ON                                ││ resume at    —                                 │
+│ model        opus                              ││ resumes      0 sent · 0 failed in a row        │
+│ cycles       3 / 20 · 1 failed                 ││ waited       1h 31m this session               │
+│ active hrs   09:00-23:00 (inside)              ││ failover     none                              │
+│ uptime       2h 05m                            ││ windows      5h 1h 12m · weekly 3d 4h          │
+│ pids         csuper 4242 · claude 4243         ││ weekly       [················] — stop @ 90%   │
+│                                                ││ caffeinate   active (pid 5150)                 │
+╰────────────────────────────────────────────────╯╰────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 3 Cycles /clear → /next                                                              last 4 of 4 │
+│ completed    3/20 · failed 1 · last ok 07:26:00 (4m 00s ago)                                     │
+│ now          2/8 countdown · fires in 4s (c cancels)                                             │
+│ start    took     result                        phase                                            │
+│ 07:25:00 1m 00s   ok                            3: Auth refactor                                 │
+│ 07:18:00 3s       cancelled at countdown        —                                                │
+│ 07:05:00 35s      failed at clear_confirmed     —                                                │
+│ 06:50:00 41s      ok                            1: Setup                                         │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭────────────────────────────────────────────────╮╭────────────────────────────────────────────────╮
+│ 4 Triggers & Anomalies                         ││ 5 Git & Handover                               │
+│ countdown    /clear /next in 4s · c cancel (t… ││ checkpoint   9f3c2ab 5m 00s ago · 4 files      │
+│ fail streak  1 / 5                             ││ stashes      1 stash@{0}: csuper-anomaly-reco… │
+│ edit thrash  src/app.ts×3                      ││ handover     /Users/dev/proj/.claude/handover… │
+│ protected    no violations                     ││ │ # Handover                                   │
+│ last anomaly tool_failure_streak 1h 00m ago →… ││ │                                              │
+│ recent triggers                                ││ │ ## Next                                      │
+│ 07:29:00 task_complete ::DONE:: → /clear /next ││ │ - wire TUI                                   │
+│ 07:10:00 handover ::HANDOVER:: → /compact      ││                                                │
+╰────────────────────────────────────────────────╯╰────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 6 Log Stream                                                             level info+ · following │
+│ 07:29:00 WARN  anomaly.detected         edit thrash on src/app.ts                                │
+│ 07:29:30 ERROR hook.error               PostToolUse hook exited 1                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+● CONNECTED a1b2c3 cycles 3/20 (2/8) log info+ · p pause · c cancel · w skip · s sessions · ? help …"
+`;
+
+exports[`DashView snapshots > renders help, switcher, confirm and filter modes > help 1`] = `
+"╔══════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                                  ║
+║  csuper dash — keys                                                                              ║
+║                                                                                                  ║
+║  Tab / Shift+Tab   Move focus between panels                                                     ║
+║  1–6               Jump to a panel                                                               ║
+║  ↑ ↓ PgUp PgDn     Scroll the focused log / handover preview                                     ║
+║  s                 Session switcher                                                              ║
+║  p                 Pause / resume autopilot                                                      ║
+║  c                 Cancel pending /clear countdown                                               ║
+║  w                 Skip rate-limit wait (asks y/N)                                               ║
+║  l                 Expand the log stream to full screen                                          ║
+║  /                 Filter logs (text); Enter keeps, Esc clears                                   ║
+║  f                 Cycle log level: all → info+ → warn+ → error                                  ║
+║  h                 Toggle the handover.md preview                                                ║
+║  ?                 Help overlay                                                                  ║
+║  q / Ctrl+C        Quit the dashboard (the session keeps running)                                ║
+║                                                                                                  ║
+║  Keys act only in this terminal; the supervised session is never touched directly. Press any     ║
+║  key to close.                                                                                   ║
+║                                                                                                  ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════════╝
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+● CONNECTED a1b2c3 cycles 3/20 (2/8) log info+ · p pause · c cancel · w skip · s sessions · ? help …"
+`;
+
+exports[`DashView snapshots > renders the full-screen log 1`] = `
+"╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 6 Log Stream                                               level info+ · following · esc to exit │
+│ 07:28:30 INFO  trigger.matched          ::DONE:: matched (last_line) {"trigger":"task_complete"} │
+│ 07:29:00 WARN  anomaly.detected         edit thrash on src/app.ts                                │
+│ 07:29:30 ERROR hook.error               PostToolUse hook exited 1                                │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+● CONNECTED a1b2c3 cycles 3/20 (2/8) log info+ · p pause · c cancel · w skip · s sessions · ? help …"
+`;
+
+exports[`DashView snapshots > shows PAUSED with reason and a DISCONNECTED banner 1`] = `
+" DISCONNECTED — showing last known state, reconnecting…
+╭────────────────────────────────────────────────╮╭────────────────────────────────────────────────╮
+│ 1 Session & Autopilot                          ││ 2 Rate Limits & Quota                          │
+│ session      a1b2c3 v0.1.0                     ││ state        ok · last: 5-hour limit (hook)    │
+│ project      /Users/dev/proj                   ││ resets at    05:30:00 (now)                    │
+│ autopilot    PAUSED (breaker)                  ││ resume at    —                                 │
+│ model        opus                              ││ resumes      0 sent · 0 failed in a row        │
+│ cycles       3 / 20 · 1 failed                 ││ waited       1h 31m this session               │
+│ active hrs   09:00-23:00 (inside)              ││ failover     none                              │
+│ uptime       2h 05m                            ││ windows      5h 1h 12m · weekly 3d 4h          │
+│ pids         csuper 4242 · claude 4243         ││ weekly       [················] — stop @ 90%   │
+│                                                ││ caffeinate   active (pid 5150)                 │
+╰────────────────────────────────────────────────╯╰────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 3 Cycles /clear → /next                                                              last 4 of 4 │
+│ completed    3/20 · failed 1 · last ok 07:26:00 (4m 00s ago)                                     │
+│ now          2/8 countdown · fires in 4s (c cancels)                                             │
+│ start    took     result                        phase                                            │
+│ 07:25:00 1m 00s   ok                            3: Auth refactor                                 │
+│ 07:18:00 3s       cancelled at countdown        —                                                │
+│ 07:05:00 35s      failed at clear_confirmed     —                                                │
+│ 06:50:00 41s      ok                            1: Setup                                         │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭────────────────────────────────────────────────╮╭────────────────────────────────────────────────╮
+│ countdowns & /clear /next in 4s · c cancel (t… ││ 5 Git & Handover                               │
+│ fail streak  1 / 5                             ││ checkpoint   9f3c2ab 5m 00s ago · 4 files      │
+│ edit thrash  src/app.ts×3                      ││ stashes      1 stash@{0}: csuper-anomaly-reco… │
+│ protected    no violations                     ││ handover     /Users/dev/proj/.claude/handover… │
+│ last anomaly tool_failure_streak 1h 00m ago →… ││ │ # Handover                                   │
+│ recent triggers                                ││ │                                              │
+│ 07:29:00 task_complete ::DONE:: → /clear /next ││ │ ## Next                                      │
+│ 07:10:00 handover ::HANDOVER:: → /compact      ││ │ - wire TUI                                   │
+╰────────────────────────────────────────────────╯╰────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 6 Log Stream                                                             level info+ · following │
+│ 07:29:00 WARN  anomaly.detected         edit thrash on src/app.ts                                │
+│ 07:29:30 ERROR hook.error               PostToolUse hook exited 1                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+● DISCONNECTED a1b2c3 cycles 3/20 (2/8) log info+ · p pause · c cancel · w skip · s sessions · ? he…"
+`;
+
+exports[`DashView snapshots > shows waiting state with resume time 1`] = `
+"╭────────────────────────────────────────────────╮╭────────────────────────────────────────────────╮
+│ 1 Session & Autopilot                          ││ 2 Rate Limits & Quota                          │
+│ session      a1b2c3 v0.1.0                     ││ state        waiting · 5-hour limit (hook)     │
+│ project      /Users/dev/proj                   ││ resets at    05:30:00 (now)                    │
+│ autopilot    ON                                ││ resume at    07:40:00 in 10m 00s (incl. margi… │
+│ model        opus                              ││ resumes      0 sent · 0 failed in a row        │
+│ cycles       3 / 20 · 1 failed                 ││ waited       1h 31m this session               │
+│ active hrs   09:00-23:00 (inside)              ││ failover     none                              │
+│ uptime       2h 05m                            ││ windows      5h 1h 12m · weekly 3d 4h          │
+│ pids         csuper 4242 · claude 4243         ││ weekly       [███████████████░] 95% stop @ 90% │
+│                                                ││ caffeinate   active (pid 5150)                 │
+╰────────────────────────────────────────────────╯╰────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 3 Cycles /clear → /next                                                              last 4 of 4 │
+│ completed    3/20 · failed 1 · last ok 07:26:00 (4m 00s ago)                                     │
+│ now          2/8 countdown                                                                       │
+│ start    took     result                        phase                                            │
+│ 07:25:00 1m 00s   ok                            3: Auth refactor                                 │
+│ 07:18:00 3s       cancelled at countdown        —                                                │
+│ 07:05:00 35s      failed at clear_confirmed     —                                                │
+│ 06:50:00 41s      ok                            1: Setup                                         │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭────────────────────────────────────────────────╮╭────────────────────────────────────────────────╮
+│ 4 Triggers & Anomalies                         ││ 5 Git & Handover                               │
+│ countdown    none                              ││ checkpoint   9f3c2ab 5m 00s ago · 4 files      │
+│ fail streak  1 / 5                             ││ stashes      1 stash@{0}: csuper-anomaly-reco… │
+│ edit thrash  src/app.ts×3                      ││ handover     /Users/dev/proj/.claude/handover… │
+│ protected    no violations                     ││ │ # Handover                                   │
+│ last anomaly tool_failure_streak 1h 00m ago →… ││ │                                              │
+│ recent triggers                                ││ │ ## Next                                      │
+│ 07:29:00 task_complete ::DONE:: → /clear /next ││ │ - wire TUI                                   │
+│ 07:10:00 handover ::HANDOVER:: → /compact      ││                                                │
+╰────────────────────────────────────────────────╯╰────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 6 Log Stream                                                             level info+ · following │
+│ 07:29:00 WARN  anomaly.detected         edit thrash on src/app.ts                                │
+│ 07:29:30 ERROR hook.error               PostToolUse hook exited 1                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+● CONNECTED a1b2c3 cycles 3/20 (2/8) log info+ · p pause · c cancel · w skip · s sessions · ? help …"
+`;

@@ -1,0 +1,49 @@
+{
+  "name": "csuper",
+  "version": "0.1.0",
+  "description": "Claude Code supervisor — terminal status dashboard (csuper dash, status, logs, sessions, ctl)",
+  "type": "module",
+  "bin": {
+    "csuper": "dist/csuper.js"
+  },
+  "files": [
+    "dist",
+    "csuper.config.yaml"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "demo": "tsx scripts/demo-daemon.ts",
+    "test:e2e": "bash tests/e2e/run.sh"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "esbuild": "^0.28.2",
+    "ink": "^6.8.0",
+    "ink-testing-library": "^4.0.0",
+    "react": "^19.3.1",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.7",
+    "yaml": "^2.9.1",
+    "zod": "^3.25.76"
+  },
+  "dependencies": {
+    "node-pty": "^1.1.0"
+  },
+  "allowScripts": {
+    "node-pty@1.1.0": true
+  }
+}
