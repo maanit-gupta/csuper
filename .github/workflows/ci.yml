@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     # csuper targets macOS on Apple Silicon (package.json: os darwin, cpu arm64).
-    runs-on: macos-14
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
